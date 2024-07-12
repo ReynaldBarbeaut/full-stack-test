@@ -27,6 +27,6 @@ return function (App $app) {
         $group->get('/vehicle-makes/{id}', ViewVehicleMakesAction::class);
         $group->get('/vehicle-models/{vehicle_make_id}', ViewVehicleModelsAction::class);
         $group->get('/vehicle-years/{vehicle_make_id}', ViewVehicleYearsAction::class);
-        $group->get('/vehicles/{vehicle_make_id}', ViewVehiclesAction::class);
+        $group->get('/vehicles-coverage/{vehicle_make_id}', ViewVehiclesAction::class);
     });
 };
