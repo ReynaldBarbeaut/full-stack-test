@@ -28,7 +28,7 @@ class VehicleRepository
         $records = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
         if (!count($records)) {
-            throw new DomainRecordNotFoundException("Vehicles for vehicle make $id not found");
+            throw new DomainRecordNotFoundException("Vehicles for vehicle make id $id not found");
         }
 
         return $records;
@@ -42,7 +42,8 @@ class VehicleRepository
         $sql = "SELECT DISTINCT vm.name, v.vehicle_year 
             FROM vehicle v
             LEFT JOIN vehicle_model vm ON vm.vehicle_model_id = v.vehicle_model_id 
-            WHERE v.vehicle_make_id = ?;";
+            WHERE v.vehicle_make_id = ?
+            AND v.state = 1;";
 
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(1, $id, PDO::PARAM_INT);
@@ -50,7 +51,7 @@ class VehicleRepository
         $records = $stmt->fetchAll(PDO::FETCH_GROUP|PDO::FETCH_COLUMN);
 
         if (!count($records)) {
-            throw new DomainRecordNotFoundException("Vehicles for vehicle make $id not found");
+            throw new DomainRecordNotFoundException("Active vehicles for vehicle make id: $id not found");
         }
 
         return $records;
