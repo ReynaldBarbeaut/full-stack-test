@@ -15,10 +15,19 @@ class VehicleService implements VehicleServiceInterface
         $this->vehicleRepository = $vehicleRepository;
     }
 
-    public function getAllModelYearsByVehicleMake(int $id): array
+    public function getAllYearsByVehicleMake(int $id): array
     {
         $vehicleYears = $this->vehicleRepository->findYearsVehicleMake($id);
 
         return array_map('intval', $vehicleYears);
+    }
+
+    public function getAllVehicleByVehicleMake(int $id): array
+    {
+        $vehicles = $this->vehicleRepository->findVehiclesByVehicleMake($id);
+
+        return array_map(function ($vehicle) {
+            return array_map('intval', $vehicle);
+        }, $vehicles);
     }
 }

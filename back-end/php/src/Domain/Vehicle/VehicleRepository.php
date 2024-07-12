@@ -33,4 +33,26 @@ class VehicleRepository
 
         return $records;
     }
+
+    /**
+     * @throws DomainRecordNotFoundException
+     */
+    public function findVehiclesByVehicleMake(int $id): array
+    {
+        $sql = "SELECT DISTINCT vm.name, v.vehicle_year 
+            FROM vehicle v
+            LEFT JOIN vehicle_model vm ON vm.vehicle_model_id = v.vehicle_model_id 
+            WHERE v.vehicle_make_id = ?;";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $records = $stmt->fetchAll(PDO::FETCH_GROUP|PDO::FETCH_COLUMN);
+
+        if (!count($records)) {
+            throw new DomainRecordNotFoundException("Vehicles for vehicle make $id not found");
+        }
+
+        return $records;
+    }
 }

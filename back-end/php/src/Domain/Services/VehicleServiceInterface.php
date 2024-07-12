@@ -9,5 +9,10 @@ interface VehicleServiceInterface
     /**
      * @throws DomainRecordNotFoundException
      */
-    public function getAllModelYearsByVehicleMake(int $id): array;
+    public function getAllYearsByVehicleMake(int $id): array;
+
+    /**
+     * @throws DomainRecordNotFoundException
+     */
+    public function getAllVehicleByVehicleMake(int $id): array;
 }
