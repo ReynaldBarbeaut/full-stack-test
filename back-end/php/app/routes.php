@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use App\Application\Actions\VehicleMake\ListVehicleMakesAction;
 use App\Application\Actions\VehicleMake\ViewVehicleMakesAction;
+use App\Application\Actions\VehicleModel\ViewVehicleModelsAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
@@ -22,5 +23,6 @@ return function (App $app) {
     $app->group('/api', function (Group $group) {
         $group->get('/vehicle-makes', ListVehicleMakesAction::class);
         $group->get('/vehicle-makes/{id}', ViewVehicleMakesAction::class);
+        $group->get('/vehicle-models/{vehicle_make_id}', ViewVehicleModelsAction::class);
     });
 };

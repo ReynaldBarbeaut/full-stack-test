@@ -2,6 +2,9 @@
 declare(strict_types=1);
 
 use App\Application\Settings\SettingsInterface;
+use App\Domain\Services\VehicleModelService;
+use App\Domain\Services\VehicleModelServiceInterface;
+use App\Domain\VehicleModel\VehicleModelRepository;
 use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -39,6 +42,9 @@ return function (ContainerBuilder $containerBuilder) {
             error_log($dsn);
         
             return new PDO($dsn, $username, $password, $flags);
+        },
+        VehicleModelServiceInterface::class => function (ContainerInterface $container) {
+            return new VehicleModelService($container->get(VehicleModelRepository::class));
         },
     ]);
 };
