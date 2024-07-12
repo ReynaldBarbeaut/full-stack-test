@@ -4,6 +4,9 @@ declare(strict_types=1);
 use App\Application\Settings\SettingsInterface;
 use App\Domain\Services\VehicleModelService;
 use App\Domain\Services\VehicleModelServiceInterface;
+use App\Domain\Services\VehicleService;
+use App\Domain\Services\VehicleServiceInterface;
+use App\Domain\Vehicle\VehicleRepository;
 use App\Domain\VehicleModel\VehicleModelRepository;
 use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
@@ -45,6 +48,9 @@ return function (ContainerBuilder $containerBuilder) {
         },
         VehicleModelServiceInterface::class => function (ContainerInterface $container) {
             return new VehicleModelService($container->get(VehicleModelRepository::class));
+        },
+        VehicleServiceInterface::class => function (ContainerInterface $container) {
+            return new VehicleService($container->get(VehicleRepository::class));
         },
     ]);
 };

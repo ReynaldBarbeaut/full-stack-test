@@ -9,7 +9,7 @@ class ViewVehicleModelsAction extends VehicleModelAction
     public function action(): Response
     {
         $vehicleMakeId = (int)$this->resolveArg('vehicle_make_id');
-        $this->logger->info("Vehicle make of id `${vehicleMakeId}` was viewed.");
+        $this->logger->info("Vehicle models of vehicle make of id `${vehicleMakeId}` were viewed.");
 
         return $this->respondWithJSON($this->vehicleModelService->getAllByVehicleMake($vehicleMakeId));
     }
