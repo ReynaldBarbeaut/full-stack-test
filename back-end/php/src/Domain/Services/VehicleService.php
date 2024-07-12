@@ -2,7 +2,6 @@
 
 namespace App\Domain\Services;
 
-use App\Domain\Vehicle\Vehicle;
 use App\Domain\Vehicle\VehicleRepository;
 
 class VehicleService implements VehicleServiceInterface
@@ -29,5 +28,10 @@ class VehicleService implements VehicleServiceInterface
         return array_map(function ($vehicle) {
             return array_map('intval', $vehicle);
         }, $vehicles);
+    }
+
+    public function updateVehicleState(int $vehicleMakeId, int $modelId, int $year, bool $state): bool
+    {
+        return $this->vehicleRepository->updateVehicleState($vehicleMakeId, $modelId, $year, $state);
     }
 }

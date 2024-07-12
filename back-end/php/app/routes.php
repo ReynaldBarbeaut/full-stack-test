@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Application\Actions\Vehicle\UpdateVehicleStateAction;
 use App\Application\Actions\Vehicle\ViewVehiclesAction;
 use App\Application\Actions\Vehicle\ViewVehicleYearsAction;
 use App\Application\Actions\VehicleMake\ListVehicleMakesAction;
@@ -28,5 +29,6 @@ return function (App $app) {
         $group->get('/vehicle-models/{vehicle_make_id}', ViewVehicleModelsAction::class);
         $group->get('/vehicle-years/{vehicle_make_id}', ViewVehicleYearsAction::class);
         $group->get('/vehicles-coverage/{vehicle_make_id}', ViewVehiclesAction::class);
+        $group->post('/update-vehicles-state', UpdateVehicleStateAction::class);
     });
 };

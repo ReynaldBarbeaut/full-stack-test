@@ -15,4 +15,6 @@ interface VehicleServiceInterface
      * @throws DomainRecordNotFoundException
      */
     public function getAllVehicleByVehicleMake(int $id): array;
+
+    public function updateVehicleState(int $vehicleMakeId, int $modelId, int $year, bool $state): bool;
 }

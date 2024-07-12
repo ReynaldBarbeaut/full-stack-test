@@ -56,4 +56,20 @@ class VehicleRepository
 
         return $records;
     }
+
+    public function updateVehicleState(int $vehicleMakeId, int $modelId, int $year, bool $state): bool
+    {
+        $sql = "UPDATE vehicle 
+                SET state = ?
+                WHERE vehicle_year = ?
+                AND vehicle_make_id = ?
+                AND vehicle_model_id = ?;";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(1, $state, PDO::PARAM_BOOL);
+        $stmt->bindParam(2, $vehicleMakeId, PDO::PARAM_INT);
+        $stmt->bindParam(3, $year, PDO::PARAM_INT);
+        $stmt->bindParam(4, $modelId, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 }
