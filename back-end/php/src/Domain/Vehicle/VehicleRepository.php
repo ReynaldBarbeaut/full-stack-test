@@ -19,8 +19,9 @@ class VehicleRepository
      */
     public function findYearsVehicleMake(int $id): array
     {
-        $sql = "SELECT DISTINCT vehicle_year FROM vehicle
-            WHERE vehicle_make_id = ?;";
+        $sql = 'SELECT DISTINCT vehicle_year FROM vehicle
+            WHERE vehicle_make_id = ?
+            ORDER BY vehicle_year DESC;';
 
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(1, $id, PDO::PARAM_INT);
